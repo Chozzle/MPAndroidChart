@@ -131,7 +131,7 @@ public class CombinedChartRenderer extends DataRenderer {
             mHighlightBuffer.clear();
 
             for (Highlight h : indices) {
-                if (h.getDataIndex() == dataIndex || h.getDataIndex() == -1)
+                //if (h.getDataIndex() == dataIndex || h.getDataIndex() == -1)
                     mHighlightBuffer.add(h);
             }
 
