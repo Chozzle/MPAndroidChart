@@ -20,4 +20,6 @@ public interface IAxisValueFormatter
      * @return
      */
     String getFormattedValue(float value, AxisBase axis);
+
+    int getLabelColor(float value);
 }

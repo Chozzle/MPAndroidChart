@@ -53,6 +53,11 @@ public class LargeValueFormatter implements IValueFormatter, IAxisValueFormatter
         return makePretty(value) + mText;
     }
 
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
+
     /**
      * Set an appendix text to be added at the end of the formatted value.
      *

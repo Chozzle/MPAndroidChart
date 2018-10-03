@@ -24,4 +24,9 @@ public class YearXAxisFormatter implements IAxisValueFormatter
         float percent = value / axis.mAxisRange;
         return mMonths[(int) (mMonths.length * percent)];
     }
+
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
 }

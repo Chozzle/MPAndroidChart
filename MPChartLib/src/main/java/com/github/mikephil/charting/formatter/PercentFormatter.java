@@ -43,6 +43,11 @@ public class PercentFormatter implements IValueFormatter, IAxisValueFormatter
         return mFormat.format(value) + " %";
     }
 
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
+
     public int getDecimalDigits() {
         return 1;
     }

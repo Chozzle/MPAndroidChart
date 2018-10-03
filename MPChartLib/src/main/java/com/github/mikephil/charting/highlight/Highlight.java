@@ -156,6 +156,14 @@ public class Highlight {
     }
 
     /**
+     * sets the dataSetIndex
+     *
+     */
+    public void setDataSetIndex(int dataSetIndex) {
+        this.mDataSetIndex = dataSetIndex;
+    }
+
+    /**
      * Only needed if a stacked-barchart entry was highlighted. References the
      * selected value within the stacked-entry.
      *

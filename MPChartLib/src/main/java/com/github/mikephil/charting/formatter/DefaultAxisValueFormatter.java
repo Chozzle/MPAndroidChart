@@ -45,6 +45,11 @@ public class DefaultAxisValueFormatter implements IAxisValueFormatter
         return mFormat.format(value);
     }
 
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
+
     /**
      * Returns the number of decimal digits this formatter uses or -1, if unspecified.
      *

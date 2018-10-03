@@ -37,4 +37,9 @@ public class MyCustomXAxisValueFormatter implements IAxisValueFormatter
         else
             return mFormat.format(value);
     }
+
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
 }

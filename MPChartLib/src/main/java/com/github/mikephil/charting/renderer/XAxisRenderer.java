@@ -203,6 +203,7 @@ public class XAxisRenderer extends AxisRenderer {
             if (mViewPortHandler.isInBoundsX(x)) {
 
                 String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
+                int labelColor = mXAxis.getValueFormatter().getLabelColor(mXAxis.mEntries[i /2]);
 
                 if (mXAxis.isAvoidFirstLastClippingEnabled()) {
 
@@ -222,13 +223,20 @@ public class XAxisRenderer extends AxisRenderer {
                     }
                 }
 
-                drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
+                drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees, labelColor);
             }
         }
     }
 
-    protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
-        Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+    protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees, int labelColor) {
+        if (labelColor != 0) {
+            int defaultColor = mAxisLabelPaint.getColor();
+            mAxisLabelPaint.setColor(labelColor);
+            Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+            mAxisLabelPaint.setColor(defaultColor);
+        } else {
+            Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+        }
     }
     protected Path mRenderGridLinesPath = new Path();
     protected float[] mRenderGridLinesBuffer = new float[2];

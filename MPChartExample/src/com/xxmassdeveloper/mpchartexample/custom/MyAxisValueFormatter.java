@@ -18,4 +18,9 @@ public class MyAxisValueFormatter implements IAxisValueFormatter
     public String getFormattedValue(float value, AxisBase axis) {
         return mFormat.format(value) + " $";
     }
+
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
 }

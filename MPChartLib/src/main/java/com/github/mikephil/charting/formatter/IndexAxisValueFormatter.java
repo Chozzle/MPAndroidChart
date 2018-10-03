@@ -53,6 +53,11 @@ public class IndexAxisValueFormatter implements IAxisValueFormatter
         return mValues[index];
     }
 
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
+
     public String[] getValues()
     {
         return mValues;
