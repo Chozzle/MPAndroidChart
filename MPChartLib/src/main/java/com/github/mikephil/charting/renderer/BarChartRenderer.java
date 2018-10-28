@@ -27,11 +27,14 @@ import java.util.List;
 public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
     protected BarDataProvider mChart;
+    private static final float CORNER_RADIUS = Utils.convertDpToPixel(9);
 
     /**
      * the rect object that is used for drawing the bars
      */
     protected RectF mBarRect = new RectF();
+    private final RectF rectForRoundCorners;
+
 
     protected BarBuffer[] mBarBuffers;
 
@@ -54,6 +57,9 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
         mBarBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBarBorderPaint.setStyle(Paint.Style.STROKE);
+        mBarBorderPaint.setStrokeCap(Paint.Cap.ROUND);
+
+        rectForRoundCorners = new RectF();
     }
 
     @Override
@@ -190,13 +196,14 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                         android.graphics.Shader.TileMode.MIRROR));
             }
 
-
-            c.drawRect(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
-                    buffer.buffer[j + 3], mRenderPaint);
+            rectForRoundCorners.set(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
+                    buffer.buffer[j + 3]);
+            c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mRenderPaint);
 
             if (drawBorder) {
-                c.drawRect(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
-                        buffer.buffer[j + 3], mBarBorderPaint);
+                rectForRoundCorners.set(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
+                        buffer.buffer[j + 3]);
+                c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mBarBorderPaint);
             }
         }
     }
@@ -493,7 +500,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
             setHighlightDrawPos(high, mBarRect);
 
-            c.drawRect(mBarRect, mHighlightPaint);
+            c.drawRoundRect(mBarRect, CORNER_RADIUS, CORNER_RADIUS, mHighlightPaint);
         }
     }
 
