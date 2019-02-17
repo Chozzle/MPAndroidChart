@@ -28,4 +28,5 @@ public interface IAxisValueFormatter
     String getFormattedValue(float value, AxisBase axis);
 
     int getLabelColor(float value);
+
 }
