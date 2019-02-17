@@ -64,4 +64,9 @@ public class DefaultValueFormatter extends ValueFormatter
     public int getDecimalDigits() {
         return mDecimalDigits;
     }
+
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
 }

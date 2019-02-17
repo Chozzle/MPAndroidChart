@@ -68,4 +68,9 @@ public class StackedValueFormatter extends ValueFormatter
         // return the "proposed" value
         return mFormat.format(value) + mSuffix;
     }
+
+    @Override
+    public int getLabelColor(float value) {
+        return 0;
+    }
 }
