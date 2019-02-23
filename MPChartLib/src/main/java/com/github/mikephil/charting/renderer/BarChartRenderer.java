@@ -40,6 +40,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
     protected Paint mShadowPaint;
     protected Paint mBarBorderPaint;
+    protected Paint mBarCenterLabelPaint;
 
     public BarChartRenderer(BarDataProvider chart, ChartAnimator animator,
                             ViewPortHandler viewPortHandler) {
@@ -59,6 +60,9 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
         mBarBorderPaint.setStyle(Paint.Style.STROKE);
         mBarBorderPaint.setStrokeCap(Paint.Cap.ROUND);
 
+        mBarCenterLabelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBarCenterLabelPaint.setStyle(Paint.Style.STROKE);
+        mBarCenterLabelPaint.setTextAlign(Paint.Align.CENTER);
         rectForRoundCorners = new RectF();
     }
 
@@ -97,6 +101,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
         Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
 
         mBarBorderPaint.setColor(dataSet.getBarBorderColor());
+        mBarCenterLabelPaint.setColor(dataSet.getBarBorderColor());
         mBarBorderPaint.setStrokeWidth(Utils.convertDpToPixel(dataSet.getBarBorderWidth()));
 
         final boolean drawBorder = dataSet.getBarBorderWidth() > 0.f;
@@ -203,7 +208,13 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
             if (drawBorder) {
                 rectForRoundCorners.set(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
                         buffer.buffer[j + 3]);
+                float inset = mBarBorderPaint.getStrokeWidth() / 2;
+                rectForRoundCorners.inset(inset, inset);
                 c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mBarBorderPaint);
+                if (rectForRoundCorners.width() > 24) {
+                    mBarCenterLabelPaint.setTextSize(rectForRoundCorners.width() / 4);
+                    c.drawText("?", rectForRoundCorners.centerX(), rectForRoundCorners.centerY(), mBarCenterLabelPaint);
+                }
             }
         }
     }
