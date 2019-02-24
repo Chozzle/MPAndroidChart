@@ -61,7 +61,6 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
         mBarBorderPaint.setStrokeCap(Paint.Cap.ROUND);
 
         mBarCenterLabelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBarCenterLabelPaint.setStyle(Paint.Style.STROKE);
         mBarCenterLabelPaint.setTextAlign(Paint.Align.CENTER);
         rectForRoundCorners = new RectF();
     }
@@ -205,13 +204,13 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                     buffer.buffer[j + 3]);
             c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mRenderPaint);
 
-            if (drawBorder) {
+            if (drawBorder && rectForRoundCorners.height() > dataSet.getValueTextSize() * 2) {
                 rectForRoundCorners.set(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
                         buffer.buffer[j + 3]);
                 float inset = mBarBorderPaint.getStrokeWidth() / 2;
                 rectForRoundCorners.inset(inset, inset);
                 c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mBarBorderPaint);
-                if (rectForRoundCorners.height() > dataSet.getValueTextSize() * 2 && isDrawingValuesAllowed(mChart)) {
+                if (isDrawingValuesAllowed(mChart)) {
                     mBarCenterLabelPaint.setTextSize(dataSet.getValueTextSize());
                     mBarCenterLabelPaint.setTypeface(dataSet.getValueTypeface());
                     c.drawText("?", rectForRoundCorners.centerX(), rectForRoundCorners.centerY(), mBarCenterLabelPaint);
