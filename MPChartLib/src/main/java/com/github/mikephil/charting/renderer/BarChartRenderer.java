@@ -211,8 +211,9 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                 float inset = mBarBorderPaint.getStrokeWidth() / 2;
                 rectForRoundCorners.inset(inset, inset);
                 c.drawRoundRect(rectForRoundCorners, CORNER_RADIUS, CORNER_RADIUS, mBarBorderPaint);
-                if (rectForRoundCorners.width() > 24) {
-                    mBarCenterLabelPaint.setTextSize(rectForRoundCorners.width() / 4);
+                if (rectForRoundCorners.height() > dataSet.getValueTextSize() * 2 && isDrawingValuesAllowed(mChart)) {
+                    mBarCenterLabelPaint.setTextSize(dataSet.getValueTextSize());
+                    mBarCenterLabelPaint.setTypeface(dataSet.getValueTypeface());
                     c.drawText("?", rectForRoundCorners.centerX(), rectForRoundCorners.centerY(), mBarCenterLabelPaint);
                 }
             }
